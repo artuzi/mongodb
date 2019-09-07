@@ -22,6 +22,7 @@ import com.artuzi.infinitymongo.dto.MovimentoDTO;
 import com.artuzi.infinitymongo.entity.Diaria;
 import com.artuzi.infinitymongo.entity.Movimento;
 import com.artuzi.infinitymongo.service.DiariaService;
+import com.artuzi.infinitymongo.service.MovimentoService;
 
 
 @RestController
@@ -31,10 +32,10 @@ public class Aplicacao {
 	Logger logger = LoggerFactory.getLogger(Aplicacao.class);	
 
 	@Autowired
-	private MovimentoRepository ocorrenciasRepository;
+	private DiariaService diariasService;	
 	
 	@Autowired
-	private DiariaService diariasService;	
+	private MovimentoService movimentoService;
 	
 	@RequestMapping(method = RequestMethod.POST, value="/insert")
 	public ResponseEntity<ArrayList<Movimento>> insertMovimento(@RequestBody ArrayList<MovimentoDTO> movimentosDTO) {
@@ -52,7 +53,7 @@ public class Aplicacao {
 			movimentos.add(mov);
 		}
 		
-		ocorrenciasRepository.saveAll(movimentos);
+		movimentoService.saveMovimentos(movimentos);
 		
 		logger.info("Insert processado. Inseridos " + movimentos.size());
 		
@@ -62,7 +63,7 @@ public class Aplicacao {
 	@GetMapping("/find/{descricao}")	
 	public ResponseEntity<ArrayList<Movimento>> buscaMovimento(@PathVariable String descricao) {
 		
-		ArrayList<Movimento> movimento = ocorrenciasRepository.findByDescricao(descricao);
+		ArrayList<Movimento> movimento = movimentoService.findMovimentoByDescricao(descricao);
 		
 		if (movimento.size() != 0) {
 			logger.info("Encontrado movimento");
