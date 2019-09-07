@@ -5,7 +5,7 @@ import java.util.Date;
 
 import com.artuzi.infinitymongo.entity.Diaria;
 
-public interface DiariasService {
+public interface DiariaService {
 	
 	public Long geraNovaDiaria(Date diaria);
 	public ArrayList<Diaria> findDiariasStatus(String status);

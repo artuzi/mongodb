@@ -14,9 +14,9 @@ import com.artuzi.infinitymongo.entity.Diaria;
 
 
 @Service
-public class DiariasServiceImpl implements DiariasService {
+public class DiariaServiceImpl implements DiariaService {
 	
-	Logger logger = LoggerFactory.getLogger(DiariasServiceImpl.class);	
+	Logger logger = LoggerFactory.getLogger(DiariaServiceImpl.class);	
 	
 	@Autowired
 	private SequenceService sequenceUtilService;
