@@ -45,6 +45,7 @@ public class DiariasImpl implements Diarias {
 		
 		dia.setId(id);
 		dia.setDiaria(diaria);
+		dia.setStatus("INI");    //Status Inicial
 
 		diariaRepository.save(dia);
 

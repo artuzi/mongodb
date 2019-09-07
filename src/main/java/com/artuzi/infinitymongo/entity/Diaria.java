@@ -9,6 +9,7 @@ public class Diaria {
 	@Id
 	private Long id;
 	private Date diaria;
+	private String status;
 	
 	public Long getId() {
 		return id;
@@ -21,6 +22,12 @@ public class Diaria {
 	}
 	public void setDiaria(Date diaria) {
 		this.diaria = diaria;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 }
