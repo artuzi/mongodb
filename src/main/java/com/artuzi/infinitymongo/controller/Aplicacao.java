@@ -43,13 +43,14 @@ public class Aplicacao {
 		ArrayList<Movimento> movimentos = new ArrayList<Movimento>();
 		
 		Date diaria = new Date();
-		Long id = diariasService.geraNovaDiaria(diaria);
+		Long idDiaria = diariasService.geraNovaDiaria(diaria);
 
 		for (MovimentoDTO movimentoDTO: movimentosDTO) {
 			Movimento mov = new Movimento();
-			mov.setId(id);
+			mov.setIdDiaria(idDiaria);
 			mov.setDescricao(movimentoDTO.getDescricao());
 			mov.setValor(movimentoDTO.getValor());
+			mov.setStatus("PEN");
 			movimentos.add(mov);
 		}
 		
@@ -83,5 +84,15 @@ public class Aplicacao {
 		ArrayList<Diaria> diarias = diariasService.findDiariasStatus("PEN");
 		
 		return new ResponseEntity<>(diarias,HttpStatus.OK);
+	
+	}
+
+	@GetMapping("/findMovimentoDiaria/{idDiaria}")	
+	public ResponseEntity<ArrayList<Movimento>> findMovimentoDiaria(@PathVariable Long idDiaria) {
+	
+		logger.info("Retornando movimentos da diaria");
+		ArrayList<Movimento> movimentos = movimentoService.findMovimentoByIdDiaria(idDiaria);
+		
+		return new ResponseEntity<>(movimentos,HttpStatus.OK);
 	}
 }

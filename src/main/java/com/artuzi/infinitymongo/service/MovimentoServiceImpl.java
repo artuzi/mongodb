@@ -24,4 +24,11 @@ public class MovimentoServiceImpl implements MovimentoService{
 		movimentoRepository.saveAll(movimentos);
 	}
 
+	@Override
+	public ArrayList<Movimento> findMovimentoByIdDiaria(Long idDiaria) {
+		// TODO Auto-generated method stub
+		
+		return movimentoRepository.findByIdDiaria(idDiaria);
+	}
+
 }

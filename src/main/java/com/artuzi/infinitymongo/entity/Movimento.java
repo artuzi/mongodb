@@ -5,14 +5,16 @@ import org.springframework.data.annotation.Id;
 public class Movimento {
 
 	@Id
-	private Long id;
+	private String id;
+	private Long idDiaria;
 	private String descricao;
 	private Double valor;
+	private String status;
 	
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getDescricao() {
@@ -26,6 +28,18 @@ public class Movimento {
 	}
 	public void setValor(Double valor) {
 		this.valor = valor;
+	}
+	public Long getIdDiaria() {
+		return idDiaria;
+	}
+	public void setIdDiaria(Long idDiaria) {
+		this.idDiaria = idDiaria;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 		
 }
