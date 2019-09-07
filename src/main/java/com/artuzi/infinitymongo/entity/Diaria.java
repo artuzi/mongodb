@@ -4,10 +4,13 @@ import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Diaria {
 	
 	@Id
 	private Long id;
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date diaria;
 	private String status;
 	

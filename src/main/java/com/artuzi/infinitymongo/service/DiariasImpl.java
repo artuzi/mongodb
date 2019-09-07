@@ -1,6 +1,7 @@
 package com.artuzi.infinitymongo.service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -45,13 +46,19 @@ public class DiariasImpl implements Diarias {
 		
 		dia.setId(id);
 		dia.setDiaria(diaria);
-		dia.setStatus("INI");    //Status Inicial
+		dia.setStatus("PEN");    //Status inicial: pendente
 
 		diariaRepository.save(dia);
 
 		logger.info("Diaria registrada");
 		
 		return id;
+	}
+
+	@Override
+	public ArrayList<Diaria> findDiariasStatus(String status) {
+
+		return diariaRepository.findByStatus(status);
 	}
 
 }

@@ -19,6 +19,7 @@ import com.artuzi.infinitymongo.dao.DiariaRepository;
 import com.artuzi.infinitymongo.dao.MovimentoRepository;
 import com.artuzi.infinitymongo.dao.SequenceRepository;
 import com.artuzi.infinitymongo.dto.MovimentoDTO;
+import com.artuzi.infinitymongo.entity.Diaria;
 import com.artuzi.infinitymongo.entity.Movimento;
 import com.artuzi.infinitymongo.service.Diarias;
 
@@ -73,5 +74,13 @@ public class Aplicacao {
 		return new ResponseEntity<>(movimento,HttpStatus.OK);
 	}
 	
+
+	@GetMapping("/findDiariasPendentes")	
+	public ResponseEntity<ArrayList<Diaria>> findDiariasPendentes() {
 	
+		logger.info("Retornando diarias pendentes");
+		ArrayList<Diaria> diarias = diariasService.findDiariasStatus("PEN");
+		
+		return new ResponseEntity<>(diarias,HttpStatus.OK);
+	}
 }
