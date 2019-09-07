@@ -1,6 +1,6 @@
 package com.artuzi.infinitymongo.service;
 
-public interface SequenceUtil {
+public interface SequenceService {
 	
 	public Long findNext(String name);
 	

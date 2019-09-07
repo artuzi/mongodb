@@ -9,9 +9,9 @@ import com.artuzi.infinitymongo.dao.SequenceRepository;
 import com.artuzi.infinitymongo.entity.Sequence;
 
 @Service
-public class SequenceUtilImpl implements SequenceUtil {
+public class SequenceServiceImpl implements SequenceService {
 	
-	Logger logger = LoggerFactory.getLogger(SequenceUtilImpl.class);	
+	Logger logger = LoggerFactory.getLogger(SequenceServiceImpl.class);	
 	
 	@Autowired
 	private SequenceRepository sequenceRepository;

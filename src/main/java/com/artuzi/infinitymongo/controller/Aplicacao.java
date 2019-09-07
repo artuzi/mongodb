@@ -21,7 +21,7 @@ import com.artuzi.infinitymongo.dao.SequenceRepository;
 import com.artuzi.infinitymongo.dto.MovimentoDTO;
 import com.artuzi.infinitymongo.entity.Diaria;
 import com.artuzi.infinitymongo.entity.Movimento;
-import com.artuzi.infinitymongo.service.Diarias;
+import com.artuzi.infinitymongo.service.DiariasService;
 
 
 @RestController
@@ -34,7 +34,7 @@ public class Aplicacao {
 	private MovimentoRepository ocorrenciasRepository;
 	
 	@Autowired
-	private Diarias diariasService;	
+	private DiariasService diariasService;	
 	
 	@RequestMapping(method = RequestMethod.POST, value="/insert")
 	public ResponseEntity<ArrayList<Movimento>> insertMovimento(@RequestBody ArrayList<MovimentoDTO> movimentosDTO) {

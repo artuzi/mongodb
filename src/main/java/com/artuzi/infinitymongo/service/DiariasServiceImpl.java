@@ -14,12 +14,12 @@ import com.artuzi.infinitymongo.entity.Diaria;
 
 
 @Service
-public class DiariasImpl implements Diarias {
+public class DiariasServiceImpl implements DiariasService {
 	
-	Logger logger = LoggerFactory.getLogger(DiariasImpl.class);	
+	Logger logger = LoggerFactory.getLogger(DiariasServiceImpl.class);	
 	
 	@Autowired
-	private SequenceUtil sequenceUtilService;
+	private SequenceService sequenceUtilService;
 	
 	@Autowired
 	private DiariaRepository diariaRepository;
