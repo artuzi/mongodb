@@ -20,7 +20,7 @@ import com.artuzi.infinitymongo.dao.MovimentoRepository;
 import com.artuzi.infinitymongo.dao.SequenceRepository;
 import com.artuzi.infinitymongo.dto.MovimentoDTO;
 import com.artuzi.infinitymongo.entity.Movimento;
-import com.artuzi.infinitymongo.util.Diarias;
+import com.artuzi.infinitymongo.service.Diarias;
 
 
 @RestController

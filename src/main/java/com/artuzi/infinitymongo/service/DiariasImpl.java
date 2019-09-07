@@ -1,4 +1,4 @@
-package com.artuzi.infinitymongo.util;
+package com.artuzi.infinitymongo.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

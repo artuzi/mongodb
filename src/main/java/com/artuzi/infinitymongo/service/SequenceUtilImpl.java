@@ -1,4 +1,4 @@
-package com.artuzi.infinitymongo.util;
+package com.artuzi.infinitymongo.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

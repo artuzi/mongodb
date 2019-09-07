@@ -1,4 +1,4 @@
-package com.artuzi.infinitymongo.util;
+package com.artuzi.infinitymongo.service;
 
 public interface SequenceUtil {
 	
