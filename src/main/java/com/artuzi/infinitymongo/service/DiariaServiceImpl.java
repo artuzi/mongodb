@@ -25,20 +25,11 @@ public class DiariaServiceImpl implements DiariaService {
 	private DiariaRepository diariaRepository;
 	
 	@Override
-	public Long geraNovaDiaria(Date diaria) {
+	public Long geraNovaDiaria(Date diaria, String codProduto, String codCanal, String codEmpresa) {
 
 		//nome da sequence que controla o sequencial de diarias, incluir no DTO pra agrupar movimentos
 		Long id = sequenceUtilService.findNext("diariaSequence");
 		
-		if (diaria == null) {
-			
-			Date date = new Date(System.currentTimeMillis());
-
-			logger.info("Nao foi informada data, atribuindo data padrao");
-
-			diaria = date;
-		}
-
 		SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
 		logger.info("Proxima sequence: " + id.toString() + " para " + formatter.format(diaria));
 
@@ -47,7 +38,9 @@ public class DiariaServiceImpl implements DiariaService {
 		dia.setId(id);
 		dia.setDiaria(diaria);
 		dia.setStatus("PEN");    //Status inicial: pendente
-
+		dia.setCodProduto(codProduto);
+		dia.setCodCanal(codCanal);
+		dia.setCodEmpresa(codEmpresa);
 		diariaRepository.save(dia);
 
 		logger.info("Diaria registrada");

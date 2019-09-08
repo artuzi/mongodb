@@ -19,10 +19,12 @@ import com.artuzi.infinitymongo.dao.DiariaRepository;
 import com.artuzi.infinitymongo.dao.MovimentoRepository;
 import com.artuzi.infinitymongo.dao.SequenceRepository;
 import com.artuzi.infinitymongo.dto.MovimentoDTO;
+import com.artuzi.infinitymongo.dto.ProdutoExternoDTO;
 import com.artuzi.infinitymongo.entity.Diaria;
 import com.artuzi.infinitymongo.entity.Movimento;
 import com.artuzi.infinitymongo.service.DiariaService;
 import com.artuzi.infinitymongo.service.MovimentoService;
+import com.artuzi.infinitymongo.service.ProdutoExternoService;
 
 
 @RestController
@@ -32,31 +34,41 @@ public class Aplicacao {
 	Logger logger = LoggerFactory.getLogger(Aplicacao.class);	
 
 	@Autowired
-	private DiariaService diariasService;	
+	private DiariaService diariaService;	
 	
 	@Autowired
 	private MovimentoService movimentoService;
 	
+	@Autowired
+	private ProdutoExternoService produtoExternoService;
+	
 	@RequestMapping(method = RequestMethod.POST, value="/insert")
 	public ResponseEntity<ArrayList<Movimento>> insertMovimento(@RequestBody ArrayList<MovimentoDTO> movimentosDTO) {
+		
 		
 		ArrayList<Movimento> movimentos = new ArrayList<Movimento>();
 		
 		Date diaria = new Date();
-		Long idDiaria = diariasService.geraNovaDiaria(diaria);
 
-		for (MovimentoDTO movimentoDTO: movimentosDTO) {
-			Movimento mov = new Movimento();
-			mov.setIdDiaria(idDiaria);
-			mov.setDescricao(movimentoDTO.getDescricao());
-			mov.setValor(movimentoDTO.getValor());
-			mov.setStatus("PEN");
-			movimentos.add(mov);
+		ArrayList<ProdutoExternoDTO> produtosExternosDTO = produtoExternoService.findProdutoExternoAtivo(diaria);
+		
+		for (ProdutoExternoDTO produtoExternoDTO: produtosExternosDTO) {
+		
+			Long idDiaria = diariaService.geraNovaDiaria(diaria, produtoExternoDTO.getCodProduto(), produtoExternoDTO.getCodCanal(), produtoExternoDTO.getCodEmpresa());
+	
+			for (MovimentoDTO movimentoDTO: movimentosDTO) {
+				Movimento mov = new Movimento();
+				mov.setIdDiaria(idDiaria);
+				mov.setDescricao(movimentoDTO.getDescricao());
+				mov.setValor(movimentoDTO.getValor());
+				mov.setStatus("PEN");
+				movimentos.add(mov);
+			}
+			
+			movimentoService.saveMovimentos(movimentos);
+			
+			logger.info("Insert processado. Inseridos " + movimentos.size());
 		}
-		
-		movimentoService.saveMovimentos(movimentos);
-		
-		logger.info("Insert processado. Inseridos " + movimentos.size());
 		
 		return new ResponseEntity<>(movimentos,HttpStatus.OK);
 	}
@@ -81,7 +93,7 @@ public class Aplicacao {
 	public ResponseEntity<ArrayList<Diaria>> findDiariasPendentes() {
 	
 		logger.info("Retornando diarias pendentes");
-		ArrayList<Diaria> diarias = diariasService.findDiariasStatus("PEN");
+		ArrayList<Diaria> diarias = diariaService.findDiariasStatus("PEN");
 		
 		return new ResponseEntity<>(diarias,HttpStatus.OK);
 	
